@@ -1,6 +1,5 @@
 import { Card, CardImg, CardText, CardBody, Col } from 'reactstrap'
 
-//campsite detail component appears on the right side after a campsite on the left is clicked
 const CampsiteDetail = ({ campsite }) => {
     const { image, name, description } = campsite;
 
