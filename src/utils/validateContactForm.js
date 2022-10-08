@@ -29,4 +29,4 @@ export const validateContactForm = (values) => {
 
     return errors;
 
-}
+};

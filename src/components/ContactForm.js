@@ -35,7 +35,7 @@ const ContactForm = () => {
                             className='form-control'
                         />
                         <ErrorMessage name='firstName'>
-                            {(msg) = () => <p className='text-danger'>{msg}</p>}
+                            {(msg) => <p className='text-danger'>{msg}</p>}
                         </ErrorMessage>
                     </Col>
                 </FormGroup>
@@ -51,7 +51,7 @@ const ContactForm = () => {
                             className='form-control'
                         />
                         <ErrorMessage name='lastName'>
-                            {(msg) = () => <p className='text-danger'>{msg}</p>}
+                            {(msg) => <p className='text-danger'>{msg}</p>}
                         </ErrorMessage>
                     </Col>
                 </FormGroup>
@@ -67,7 +67,7 @@ const ContactForm = () => {
                             className='form-control'
                         />
                         <ErrorMessage name='phoneNum'>
-                            {(msg) = () => <p className='text-danger'>{msg}</p>}
+                            {(msg) => <p className='text-danger'>{msg}</p>}
                         </ErrorMessage>
                     </Col>
                 </FormGroup>
@@ -84,7 +84,7 @@ const ContactForm = () => {
                             className='form-control'
                         />
                         <ErrorMessage name='email'>
-                            {(msg) = () => <p className='text-danger'>{msg}</p>}
+                            {(msg) => <p className='text-danger'>{msg}</p>}
                         </ErrorMessage>
                     </Col>
                 </FormGroup>
