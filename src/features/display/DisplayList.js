@@ -16,12 +16,12 @@ const DisplayList = () => {
   return (
     <Row>
       {items.map((item, idx) => {
-        const { featuredItem, isLoading, ErrMsg } = item;
+        const { featuredItem, isLoading, errMsg } = item;
         if (isLoading) {
           return <Loading key={idx} />;
         }
-        if (ErrMsg) {
-          return <Error errMsg={ErrMsg} key={idx} />;
+        if (errMsg) {
+          return <Error errMsg={errMsg} key={idx} />;
         }
         return (
           featuredItem && (
