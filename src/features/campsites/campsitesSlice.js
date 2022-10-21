@@ -1,37 +1,63 @@
- //use a lower case file name for any file that does NOT export a react component
-import { createSlice } from "@reduxjs/toolkit";
-import { CAMPSITES } from "../../app/shared/CAMPSITES";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { baseUrl } from "../../app/shared/baseUrl";
+import { mapImageURL } from "../../utils/mapImageUrl";
+
+export const fetchCampsites = createAsyncThunk(
+  "campsites/fetchCampsites",
+  async () => {
+    const response = await fetch(baseUrl + "campsites");
+    if (!response.ok) {
+      return Promise.reject("Unable to fetch, status: " + response.status);
+    }
+    const data = await response.json();
+    return data;
+  }
+);
 
 const initialState = {
-    campsitesArray: CAMPSITES
+  campsitesArray: [],
+  isLoading: true,
+  errMsg: " ",
 };
 
 const campsitesSlice = createSlice({
-    name: 'campsites',
-    initialState 
+  name: "campsites",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [fetchCampsites.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchCampsites.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.errMsg = "";
+      state.campsitesArray = mapImageURL(action.payload);
+    },
+    [fetchCampsites.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.errMsg = action.error ? action.error.message : "Fetch Failed";
+    },
+  },
 });
 
 export const campsitesReducer = campsitesSlice.reducer;
 
 export const selectAllCampsites = (state) => {
-    return state.campsites.campsitesArray;
+  return state.campsites.campsitesArray;
 };
 
-//parseInt() turns an string into an integer
 export const selectCampsiteById = (id) => (state) => {
-    return state.campsites.campsitesArray.find(
-        (campsite) => campsite.id === parseInt(id)
-        );
+  return state.campsites.campsitesArray.find(
+    (campsite) => campsite.id === parseInt(id)
+  );
 };
 
 export const selectFeaturedCampsite = (state) => {
-    return state.campsites.campsitesArray.find((campsite) => campsite.featured)
+  return {
+    featuredItem: state.campsites.campsitesArray.find(
+      (campsite) => campsite.featured
+    ),
+    isLoading: state.campsites.isLoading,
+    errMsg: state.campsites.errMsg,
+  };
 };
-
-
-
-// export const selectRandomCampsite = () => {
-//     // randomCampsiteIndex = Math.floor(Math.random() * CAMPSITES.length)
-//     // return CAMPSITES[randomCampsiteIndex];
-//     return CAMPSITES[Math.floor(Math.random() * CAMPSITES.length)]
-// }
