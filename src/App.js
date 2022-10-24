@@ -12,7 +12,7 @@ import AboutPage from "./pages/AboutPage";
 import { fetchCampsites } from "./features/campsites/campsitesSlice";
 import { fetchPartners } from "./features/partners/PartnersSlice";
 import { fetchPromotions } from "./features/promotions/promotionsSlice";
-import { fetchComments} from "./features/comments/commentsSlice";
+import { fetchComments } from "./features/comments/commentsSlice";
 
 function App() {
   const dispatch = useDispatch();
